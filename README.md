@@ -1,6 +1,42 @@
+This program is created to crop an image in angular
+
+Create new project in angular
+
+In the console:
+
+ng new cropImageProject
+Choose CSS
+Do you want to enable server-side rendering and static site generation? For the moment N.
+
+To create a component inside the app 
+ng generate component imageCrop
+
+npm install ngx-image-cropper --save
+
+Note:
+
+I had a lot of problems with this app. I solved the problem including 
+
+constructor(
+    private sanitizer: DomSanitizer
+  ) {
+  }
+
+And
+   onImageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl || event.base64 || '');
+    
+    console.log(event);
+    console.log(this.croppedImage)
+    
+  }
+
+  This security feature is useful to avoid injection attacks among others. Without this feature, the event was not detected as base64
+
 # CropImageProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
+
 
 ## Development server
 
