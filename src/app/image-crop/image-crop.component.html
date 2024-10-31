@@ -1,1 +1,34 @@
-<p>image-crop works!</p>
+<div class="image-selector">
+    <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+  
+    <!-- Display original image and cropper only if an image is selected -->
+    <div *ngIf="selectedImage">
+      <h3>Original Image:</h3>
+      <img [src]="selectedImage" style="max-width: 100%; height: auto;" />
+      
+      <!-- Image cropper with cropping button inside the cropper area -->
+      <div>
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"        
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 3"
+          [resizeToWidth]="1280"
+          format="png"
+          (imageCropped)="onImageCropped($event)">
+          
+          ></image-cropper>
+        
+       
+      </div>
+    </div>
+   
+  
+    <!-- Display the cropped image after cropping -->
+    <div *ngIf="croppedImage">
+      <h3>Cropped Image:</h3>
+      <img [src]="croppedImage" style="max-width: 100%; height: auto;" />
+    </div>
+  
+    <!-- Reset button to clear the image selections -->
+    <button (click)="resetImage()">Reset</button>
+  </div>
